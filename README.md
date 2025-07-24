@@ -7,3 +7,5 @@
 ### Libraries 
 * Pandas
 * Matplotlib
+* Pathlib
+* Seaborn
