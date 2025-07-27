@@ -23,13 +23,12 @@ def main():
     logger = setup_logger() # Setup logging
 
     # Load raw dataset
-    file_path = 'data/PhotosynQ_control.csv'
-    df = pd.read_csv(file_path) 
+    file_path = 'data/PhotosynQ_control2.csv'
+    df = pd.read_csv(file_path)
 
     # Filter rows based on measurement threshold and treatment group
     filter_cols = ['qL', 'Phi2', 'PhiNO', 'PhiNPQ', 'NPQt', 'SPAD', 'Light Intensity (PAR)', 'LEF']
     data_mask = df[filter_cols].ge(0.005).all(axis=1) # keep only rows with all values >= 0.005
-    control_mask = df['Series'] == 'Control' # focus only on 'Control' treatment
 
     # Define columns to keep for analysis
     all_relavant_cols = ['Light Intensity (PAR)', 'LEF', 'Phi2', 'qL', 'PhiNPQ', 'NPQt', 'PhiNO','PS1 Active Centers', 'PS1 Open Centers', 'PS1 Over Reduced Centers', 'SPAD']
@@ -37,8 +36,8 @@ def main():
    
 
     # Apply filter and select relevant columns
-    df_filtered_all_cols = df.loc[data_mask & control_mask, all_relavant_cols]
-    df_filtered_selected_cols = df.loc[data_mask & control_mask, selected_cols]
+    df_filtered_all_cols = df.loc[data_mask, all_relavant_cols]
+    df_filtered_selected_cols = df.loc[data_mask, selected_cols]
     
     # Rename column labels for cleaner plotting
     name_map = {
