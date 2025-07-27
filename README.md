@@ -31,4 +31,13 @@ This repository provides a Python-based workflow for cleaning and analyzing Phot
 
    Visualise pairwise relationships between parameters to detect trends.
 
+### Run `main.py`
+
+<img width="1046" height="198" alt="image" src="https://github.com/user-attachments/assets/3220c1a0-9cda-445b-8dc5-312a97fa4a0b" />
+
+
+<img width="826" height="365" alt="image" src="https://github.com/user-attachments/assets/b713fb55-ef56-4192-a11f-b215fb41ccdb" />
+
+Note: Results for selected photosynthetic parameters
+
 
