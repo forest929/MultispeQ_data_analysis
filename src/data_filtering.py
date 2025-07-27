@@ -33,16 +33,5 @@ def filter_data(df:pd.DataFrame):
     df_filtered = df.loc[df[plot_columns].ge(0.005).all(axis=1), columns_of_interest]
     logger.info(f'The original data is of shape {df.shape} and the filtered data is of shape {df_filtered.shape}')
 
-    # Standardise the treatment labels
-    df_filtered['Series'] = df_filtered['Series'].replace({
-        'control': 'Control', 
-        'shade': 'ND',
-        'grey': 'ND', 
-        'Grey': 'ND',
-        'orange': 'Orange', 
-        'blue': 'Blue'
-    })
-    filtered_treatments = list(df_filtered['Series'].unique())
-    logger.info(f'The unique treatments are {filtered_treatments}')
     
     return df_filtered, plot_columns
