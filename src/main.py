@@ -23,7 +23,7 @@ def main():
     logger = setup_logger() # Setup logging
 
     # Load raw dataset
-    file_path = 'data/photosynQ_MallingAce.csv'
+    file_path = 'data/PhotosynQ_control.csv'
     df = pd.read_csv(file_path) 
 
     # Filter rows based on measurement threshold and treatment group
