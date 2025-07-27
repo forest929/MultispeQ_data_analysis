@@ -9,27 +9,38 @@ import seaborn as sns
 
 
 def main():
+    """
+    Main function for filtering PhotosynQ data and generating correlation heatmaps and pairplots.
 
-    # Initialize logger
+    Steps:
+    1. Load raw PhotosynQ data.
+    2. Filter rows where selected measurement columns meet a quality threshold (>= 0.005).
+    3. Focus on 'Control' treatment samples.
+    4. Compute correlation matrices for full and selected parameter sets.
+    5. Generate and save heatmaps and pairplots to the 'results' folder.
+    """
+    # Initialise logger
     logger = setup_logger() # Setup logging
 
-    # load data
+    # Load raw dataset
     file_path = 'data/photosynQ_MallingAce.csv'
     df = pd.read_csv(file_path) 
 
-    # Filter data
+    # Filter rows based on measurement threshold and treatment group
     filter_cols = ['qL', 'Phi2', 'PhiNO', 'PhiNPQ', 'NPQt', 'SPAD', 'Light Intensity (PAR)', 'LEF']
+    data_mask = df[filter_cols].ge(0.005).all(axis=1) # keep only rows with all values >= 0.005
+    control_mask = df['Series'] == 'Control' # focus only on 'Control' treatment
 
-    # Create mask for values >= 0.1 in specified columns
-    data_mask = df[filter_cols].ge(0.005).all(axis=1)
-    control_mask = df['Series'] == 'Control'
-     
+    # Define columns to keep for analysis
     all_relavant_cols = ['Light Intensity (PAR)', 'LEF', 'Phi2', 'qL', 'PhiNPQ', 'NPQt', 'PhiNO','PS1 Active Centers', 'PS1 Open Centers', 'PS1 Over Reduced Centers', 'SPAD']
-    df_filtered_all_cols = df.loc[data_mask & control_mask, all_relavant_cols]
-    
     selected_cols = ['Light Intensity (PAR)', 'LEF', 'Phi2', 'qL', 'PhiNPQ', 'NPQt', 'PhiNO']
-    df_filtered_selected_cols = df.loc[data_mask & control_mask, selected_cols]
+   
 
+    # Apply filter and select relevant columns
+    df_filtered_all_cols = df.loc[data_mask & control_mask, all_relavant_cols]
+    df_filtered_selected_cols = df.loc[data_mask & control_mask, selected_cols]
+    
+    # Rename column labels for cleaner plotting
     name_map = {
     'Light Intensity (PAR)': 'PAR',
     'PS1 Active Centers': 'PS1-Active',
@@ -40,10 +51,12 @@ def main():
 
     df_filtered_all_cols = df_filtered_all_cols[all_relavant_cols].rename(columns=name_map)
     df_filtered_selected_cols = df_filtered_selected_cols[selected_cols].rename(columns=name_map)
-   
+    
+    # Compute correlation matrices
     corr_matrix_all_cols = df_filtered_all_cols.corr()
     corr_matrix_selected_cols = df_filtered_selected_cols.corr()
-
+   
+    # Generate and save correlation heatmaps
     for corr_matrix, matrix_type in [(corr_matrix_all_cols, 'full'), 
                                     (corr_matrix_selected_cols, 'selected')]:
        
@@ -70,7 +83,7 @@ def main():
         plt.close()
         logger.info(f'Saved Correlation matrix for all {matrix_type} columns')
 
-    # Create pairplot
+    # Generate and save pairplots
     for df, data_type in [(df_filtered_all_cols, 'full'), 
                         (df_filtered_selected_cols, 'selected')]:
         
