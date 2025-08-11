@@ -1,4 +1,4 @@
-# 📊 PhotosynQ data analysis in Python
+# PhotosynQ data analysis in Python
 This repository provides a Python-based workflow for cleaning and analyzing PhotosynQ project data, with a focus on photosynthesis-related parameters.
 ## 🔧 Libraries Used
 * `pandas` - for data manipulation and cleaning
@@ -6,7 +6,7 @@ This repository provides a Python-based workflow for cleaning and analyzing Phot
 * `seaborn` - for advanced visualisation
 * `pathlib` - for file path handling
   
-## 📂 FILTER DATA
+## FILTER DATA
 1. **Obtain Data**
    
    Use your own dataset or download from existing public projects on the PhotosynQ platform:
@@ -23,7 +23,7 @@ This repository provides a Python-based workflow for cleaning and analyzing Phot
     'PS1 Over Reduced Centers', 'SPAD'
   ]
   ```
-## 📈 PLOT DATA
+## PLOT DATA
 1. **Correlation Heatmap**
    
    Explore relationships between variables using a heatmap of correlation coefficients.
@@ -31,13 +31,14 @@ This repository provides a Python-based workflow for cleaning and analyzing Phot
 
    Visualise pairwise relationships between parameters to detect trends.
 
-### Run `main.py`
+## Code Demonstration
+* Run `main.py`
+* Results for selected photosynthetic parameters
+
 
 <img width="1046" height="198" alt="image" src="https://github.com/user-attachments/assets/3220c1a0-9cda-445b-8dc5-312a97fa4a0b" />
 
-
 <img width="826" height="365" alt="image" src="https://github.com/user-attachments/assets/b713fb55-ef56-4192-a11f-b215fb41ccdb" />
 
-Note: Results for selected photosynthetic parameters
 
 
